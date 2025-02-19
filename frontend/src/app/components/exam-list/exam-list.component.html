@@ -1,0 +1,42 @@
+<div class="exam-list-container">
+  <header>
+    <div class="header-content">
+      <h1>Mes examens</h1>
+      <p>{{ exams.length }} examens à venir</p>
+    </div>
+    <button (click)="navigateToCreate()" class="create-button">
+      Organiser un examen
+    </button>
+  </header>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div class="exams-grid">
+    <div *ngFor="let exam of exams" class="exam-card">
+      <div class="student-info">
+        <span class="icon" [innerHTML]="icons.PERSON | safeHtml"></span>
+        <h3>{{ exam.student.first_name }}.{{ exam.student.last_name }}</h3>
+      </div>
+      <div class="exam-details">
+        <p class="location">
+          <span class="icon" [innerHTML]="icons.LOCATION | safeHtml"></span>
+          {{ exam.meeting_point }}
+        </p>
+        <p class="date" *ngIf="exam.date !== 'En attente'">
+          <span class="icon" [innerHTML]="icons.CALENDAR | safeHtml"></span>
+          {{ exam.date | date:'d MMMM' }}
+        </p>
+        <p class="time" *ngIf="exam.date !== 'En attente'">
+          <span class="icon" [innerHTML]="icons.CLOCK | safeHtml"></span>
+          {{ exam.date | date:'HH:mm' }}
+        </p>
+        <p class="status" [class]="exam.status?.toLowerCase()?.replaceAll(' ', '-')">
+          <span class="icon" [innerHTML]="getStatusIcon(exam.status) | safeHtml"></span>
+          {{ exam.status }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

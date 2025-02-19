@@ -1,0 +1,68 @@
+<div class="page-container">
+  <header>
+    <h1>Organiser un examen</h1>
+  </header>
+
+  <div class="exam-form-container">
+    <form [formGroup]="examForm" (ngSubmit)="onSubmit()">
+      <div formGroupName="student">
+        <div class="form-group">
+          <label for="first_name">Prénom</label>
+          <input 
+            id="first_name" 
+            type="text" 
+            formControlName="first_name"
+            placeholder="Prénom de l'élève"
+            class="form-input"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="last_name">Nom</label>
+          <input 
+            id="last_name" 
+            type="text" 
+            formControlName="last_name"
+            placeholder="Nom de l'élève"
+            class="form-input"
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="meeting_point">Point de rendez-vous</label>
+        <input 
+          id="meeting_point" 
+          type="text" 
+          formControlName="meeting_point"
+          placeholder="Lieu de l'examen"
+          class="form-input"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="date">Date</label>
+        <input 
+          id="date" 
+          type="datetime-local" 
+          formControlName="date"
+          class="form-input"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="status">Statut</label>
+        <select id="status" formControlName="status" class="form-input">
+          <option *ngFor="let status of examStatuses" [value]="status">
+            {{ status }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" (click)="onCancel()">Annuler</button>
+        <button type="submit" class="btn-create" [disabled]="!examForm.valid">Créer</button>
+      </div>
+    </form>
+  </div>
+</div>
